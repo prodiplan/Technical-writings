@@ -154,28 +154,6 @@ graph TD
 - Log levels yang sesuai (error, warn, info, debug)
 - Correlation ID untuk request tracing
 
-## System Diagrams
-
-### Data Flow Architecture
-![Data Flow](images/Data Flow.png)
-
-### Entity Relationship Diagram
-![ERD](images/ERD.png)
-
-### Sequence Diagrams
-
-#### AI Service Integration Flow
-![AI Service Integration Flow](images/AI Service Integration Flow sequence.png)
-
-#### Complete Grading Session Sequence
-![Complete Grading Session Sequence](images/Complete Grading Session Sequence.png)
-
-#### Realtime Communication
-![Realtime Communication](images/Realtime Communication sequence.png)
-
-#### User Registration Flow
-![User Registration Flow](images/User Registration Flow sequence.png)
-
 ## Next Steps
 
 1. Detailed database design dengan ERD

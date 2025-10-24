@@ -1,9 +1,5 @@
 # API Specification - AI Essay Preparedness Grader
 
-## System Data Flow
-
-![Data Flow](../images/Data Flow.png)
-
 ## Overview
 
 API documentation untuk AI Essay Preparedness Grader system menggunakan OpenAPI 3.0 specification. API ini mengikuti RESTful design principles dengan JWT-based authentication.
