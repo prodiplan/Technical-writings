@@ -1,5 +1,9 @@
 # ERD (Entity Relationship Diagram) - AI Essay Preparedness Grader
 
+## ERD Visualization
+
+![ERD Diagram](../images/ERD.png)
+
 ## PlantUML ERD Diagram
 
 ```plantuml

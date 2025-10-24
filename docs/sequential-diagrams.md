@@ -1,5 +1,19 @@
 # Sequential Diagrams - AI Essay Preparedness Grader
 
+## Sequence Diagram Visualizations
+
+### Complete Grading Session Sequence
+![Complete Grading Session Sequence](../images/Complete Grading Session Sequence.png)
+
+### User Registration Flow
+![User Registration Flow](../images/User Registration Flow sequence.png)
+
+### Realtime Communication Sequence
+![Realtime Communication](../images/Realtime Communication sequence.png)
+
+### AI Service Integration Flow
+![AI Service Integration Flow](../images/AI Service Integration Flow sequence.png)
+
 ## 1. Complete Grading Session Flow
 
 ```plantuml
@@ -341,59 +355,6 @@ SS -> SS: Schedule next cleanup run
 @enduml
 ```
 
-## 7. Admin Dashboard Data Flow
-
-```plantuml
-@startuml Admin_Dashboard_Flow
-
-actor Admin
-participant "Admin Frontend" as AFE
-participant "API Gateway" as API
-participant "Admin Service" as AS
-participant "Analytics Service" as AN
-participant "Database" as DB
-
-== Dashboard Loading ==
-Admin -> AFE: Access admin dashboard
-AFE -> API: GET /admin/dashboard (with admin token)
-API -> AS: Validate admin access
-AS -> DB: Verify admin role
-DB --> AS: Admin confirmed
-AS -> AN: Get dashboard analytics
-AN -> DB: Query session statistics
-DB --> AN: Statistics data
-AN -> DB: Query user metrics
-DB --> AN: User metrics
-AN -> DB: Query AI performance
-DB --> AN: Performance data
-AN --> AS: Compiled analytics
-AS --> API: Dashboard data
-API --> AFE: Dashboard response
-AFE -> Admin: Display dashboard
-
-== User Management ==
-Admin -> AFE: View user list
-AFE -> API: GET /admin/users
-API -> AS: Get user list
-AS -> DB: Query users with pagination
-DB --> AS: User data
-AS --> API: User list response
-API --> AFE: User data
-AFE -> Admin: Display user table
-
-== Session Monitoring ==
-Admin -> AFE: View active sessions
-AFE -> API: GET /admin/sessions/active
-API -> AS: Get active sessions
-AS -> DB: Query active sessions
-DB --> AS: Session data
-AS --> API: Session list
-API --> AFE: Session data
-AFE -> Admin: Display active sessions
-
-@enduml
-```
-
 ## Flow Descriptions
 
 ### 1. Complete Grading Session Flow
@@ -413,10 +374,7 @@ Menunjukkan berbagai skenario error dan mekanisme recovery untuk memastikan sist
 
 ### 6. Session Timeout and Cleanup Flow
 Proses otomatis untuk menangani sesi yang kedaluwarsa dan cleanup data yang tidak diperlukan.
-
-### 7. Admin Dashboard Data Flow
-Menunjukkan alur data untuk dashboard admin termasuk monitoring user, sesi aktif, dan analitik sistem.
-
+jadi pada dokumentasi ini.
 ## Key Integration Points
 
 1. **Authentication**: Firebase Auth integration untuk user management

@@ -1,5 +1,9 @@
 # API Specification - AI Essay Preparedness Grader
 
+## System Data Flow
+
+![Data Flow](../images/Data Flow.png)
+
 ## Overview
 
 API documentation untuk AI Essay Preparedness Grader system menggunakan OpenAPI 3.0 specification. API ini mengikuti RESTful design principles dengan JWT-based authentication.
@@ -146,7 +150,6 @@ Content-Type: application/json
 
 {
   "target_major": "Computer Science",
-  "threshold_score": 70,
   "max_questions": 10,
   "session_duration_minutes": 60
 }
@@ -368,7 +371,6 @@ Authorization: Bearer <jwt_token>
         "Product Manager"
       ]
     },
-    "confidence_score": 78,
     "created_at": "2024-01-15T11:00:00Z"
   }
 }
@@ -385,111 +387,6 @@ Authorization: Bearer <jwt_token>
 - `readiness_level` (optional): Filter by readiness level
 - `limit` (optional): Number of results per page (default: 10)
 - `offset` (optional): Number of results to skip (default: 0)
-
-### 5. Admin Service
-
-#### 5.1 Get Dashboard Analytics
-
-```http
-GET /admin/dashboard
-Authorization: Bearer <admin_jwt_token>
-```
-
-**Response (200):**
-```json
-{
-  "success": true,
-  "data": {
-    "overview": {
-      "total_users": 1250,
-      "active_sessions": 45,
-      "completed_sessions_today": 23,
-      "average_score": 68.5
-    },
-    "user_statistics": {
-      "new_users_today": 12,
-      "active_users_this_week": 156,
-      "user_retention_rate": 0.75
-    },
-    "session_statistics": {
-      "total_sessions": 3420,
-      "completion_rate": 0.82,
-      "average_session_duration": 25.5,
-      "most_popular_majors": [
-        {"major": "Computer Science", "count": 450},
-        {"major": "Business Administration", "count": 320},
-        {"major": "Medicine", "count": 280}
-      ]
-    },
-    "ai_performance": {
-      "average_response_time": 2.3,
-      "success_rate": 0.98,
-      "total_api_calls": 15420
-    }
-  }
-}
-```
-
-#### 5.2 Get Users List
-
-```http
-GET /admin/users?search=john&status=active&limit=20&offset=0
-Authorization: Bearer <admin_jwt_token>
-```
-
-**Query Parameters:**
-- `search` (optional): Search by name or email
-- `status` (optional): Filter by status
-- `limit` (optional): Number of results per page (default: 20)
-- `offset` (optional): Number of results to skip (default: 0)
-
-#### 5.3 Get Active Sessions
-
-```http
-GET /admin/sessions/active
-Authorization: Bearer <admin_jwt_token>
-```
-
-#### 5.4 Get System Health
-
-```http
-GET /admin/health
-Authorization: Bearer <admin_jwt_token>
-```
-
-**Response (200):**
-```json
-{
-  "success": true,
-  "data": {
-    "status": "healthy",
-    "timestamp": "2024-01-15T10:30:00Z",
-    "services": {
-      "database": {
-        "status": "healthy",
-        "response_time_ms": 15
-      },
-      "redis": {
-        "status": "healthy",
-        "response_time_ms": 5
-      },
-      "ai_service": {
-        "status": "healthy",
-        "response_time_ms": 230
-      },
-      "websocket_service": {
-        "status": "healthy",
-        "active_connections": 45
-      }
-    },
-    "metrics": {
-      "cpu_usage": 0.45,
-      "memory_usage": 0.62,
-      "disk_usage": 0.38
-    }
-  }
-}
-```
 
 ## WebSocket Events
 

@@ -154,18 +154,27 @@ graph TD
 - Log levels yang sesuai (error, warn, info, debug)
 - Correlation ID untuk request tracing
 
-## Deployment Strategy
+## System Diagrams
 
-### Environment Setup
-- Development environment dengan local setup
-- Staging environment untuk testing
-- Production environment dengan high availability
+### Data Flow Architecture
+![Data Flow](images/Data Flow.png)
 
-### CI/CD Pipeline
-- Automated testing (unit, integration, e2e)
-- Automated security scanning
-- Blue-green deployment atau canary releases
-- Rollback strategy
+### Entity Relationship Diagram
+![ERD](images/ERD.png)
+
+### Sequence Diagrams
+
+#### AI Service Integration Flow
+![AI Service Integration Flow](images/AI Service Integration Flow sequence.png)
+
+#### Complete Grading Session Sequence
+![Complete Grading Session Sequence](images/Complete Grading Session Sequence.png)
+
+#### Realtime Communication
+![Realtime Communication](images/Realtime Communication sequence.png)
+
+#### User Registration Flow
+![User Registration Flow](images/User Registration Flow sequence.png)
 
 ## Next Steps
 
