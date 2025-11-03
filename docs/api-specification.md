@@ -51,7 +51,11 @@ Content-Type: application/json
       "birth_date": "2000-01-15",
       "school_origin": "SMAN 1 Jakarta",
       "dream_major": "Computer Science",
-      "created_at": "2024-01-15T10:30:00Z"
+      "avatar_url": null,
+      "phone_number": null,
+      "email_verified": false,
+      "created_at": "2024-01-15T10:30:00Z",
+      "updated_at": "2024-01-15T10:30:00Z"
     },
     "token": "jwt_token_here",
     "refresh_token": "refresh_token_here"
@@ -81,7 +85,14 @@ Content-Type: application/json
       "id": "uuid",
       "email": "user@example.com",
       "full_name": "John Doe",
-      "last_login_at": "2024-01-15T10:30:00Z"
+      "birth_date": "2000-01-15",
+      "school_origin": "SMAN 1 Jakarta",
+      "dream_major": "Computer Science",
+      "avatar_url": "https://example.com/avatar.jpg",
+      "phone_number": "+62812345678",
+      "email_verified": true,
+      "created_at": "2024-01-15T10:30:00Z",
+      "updated_at": "2024-01-15T10:30:00Z"
     },
     "token": "jwt_token_here",
     "refresh_token": "refresh_token_here"
