@@ -146,6 +146,95 @@ Authorization: Bearer <jwt_token>
 }
 ```
 
+#### 1.6 Forgot Password
+
+```http
+POST /auth/forgot-password
+Content-Type: application/json
+
+{
+  "email": "user@example.com"
+}
+```
+
+**Response (200):**
+```json
+{
+  "success": true,
+  "message": "Password reset email sent successfully"
+}
+```
+
+#### 1.7 Reset Password
+
+```http
+POST /auth/reset-password
+Content-Type: application/json
+
+{
+  "oobCode": "code-from-email",
+  "newPassword": "newpassword123"
+}
+```
+
+**Response (200):**
+```json
+{
+  "success": true,
+  "message": "Password reset successfully"
+}
+```
+
+#### 1.8 Update User Profile
+
+```http
+PATCH /auth/profile
+Authorization: Bearer <jwt_token>
+Content-Type: application/json
+
+{
+  "full_name": "Updated Name",
+  "phone_number": "+62812345678",
+  "avatar_url": "https://example.com/new-avatar.jpg"
+}
+```
+
+**Response (200):**
+```json
+{
+  "success": true,
+  "data": {
+    "id": "uuid",
+    "email": "user@example.com",
+    "full_name": "Updated Name",
+    "phone_number": "+62812345678",
+    "avatar_url": "https://example.com/new-avatar.jpg",
+    "updated_at": "2024-01-15T10:45:00Z"
+  },
+  "message": "Profile updated successfully"
+}
+```
+
+#### 1.9 Delete User Account
+
+```http
+DELETE /auth/user
+Authorization: Bearer <jwt_token>
+Content-Type: application/json
+
+{
+  "password": "currentpassword123"
+}
+```
+
+**Response (200):**
+```json
+{
+  "success": true,
+  "message": "User account deleted successfully"
+}
+```
+
 ### 2. Grading Session Service
 
 #### 2.1 Create Grading Session

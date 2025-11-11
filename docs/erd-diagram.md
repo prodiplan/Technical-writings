@@ -1,5 +1,9 @@
 # ERD (Entity Relationship Diagram) - AI Essay Preparedness Grader
 
+**Version**: 1.2  
+**Last Updated**: November 2025  
+**Purpose**: Complete database schema for user profiles, grading sessions, messages, and results
+
 ## ERD Visualization
 
 ![ERD Diagram](../images/ERD.png)
@@ -21,6 +25,9 @@ entity users {
   * school_origin: varchar(255)
   * dream_major: varchar(255)
   * firebase_uid: varchar(255) unique
+  * phone_number: varchar(20)
+  * avatar_url: text
+  * email_verified: boolean default false
   * created_at: timestamp
   * updated_at: timestamp
   * is_active: boolean
@@ -35,6 +42,8 @@ entity grading_sessions {
   * current_score: integer default 0
   * threshold_score: integer default 70
   * question_count: integer default 0
+  * max_questions: integer default 10
+  * session_duration_minutes: integer default 60
   * started_at: timestamp
   * completed_at: timestamp nullable
   * expires_at: timestamp
@@ -73,7 +82,8 @@ grading_sessions ||--|| grading_results : "produces"
 ' Notes
 note top of users
   User profile information including
-  personal data and dream major
+  personal data, dream major, contact info,
+  and Firebase integration
 end note
 
 note top of grading_sessions
@@ -107,6 +117,9 @@ Menyimpan data profil pengguna yang terdaftar dalam sistem.
 - `school_origin`: Asal sekolah user
 - `dream_major`: Jurusan impian user (dari profile)
 - `firebase_uid`: UID dari Firebase Authentication
+- `phone_number`: Nomor telepon user (optional)
+- `avatar_url`: URL avatar/foto profil user (optional)
+- `email_verified`: Status verifikasi email dari Firebase
 - `created_at`: Timestamp pembuatan record
 - `updated_at`: Timestamp update terakhir
 - `is_active`: Status aktif user
@@ -122,6 +135,8 @@ Menyimpan sesi grading aktif untuk setiap user.
 - `current_score`: Skor akumulasi saat ini
 - `threshold_score`: Threshold skor untuk menyelesaikan sesi
 - `question_count`: Jumlah pertanyaan yang telah diajukan
+- `max_questions`: Jumlah maksimal pertanyaan dalam sesi
+- `session_duration_minutes`: Durasi sesi dalam menit
 - `started_at`: Timestamp mulai sesi
 - `completed_at`: Timestamp selesai sesi (nullable)
 - `expires_at`: Timestamp kedaluwarsa sesi
@@ -183,6 +198,7 @@ Menyimpan hasil akhir analisis grading session.
 ### Additional Indexes
 - `users.email` → unique index untuk login
 - `users.firebase_uid` → unique index untuk Firebase integration
+- `users.email_verified` → index untuk filtering verified users
 - `grading_sessions.status` → index untuk filtering active sessions
 - `grading_sessions.expires_at` → index untuk cleanup expired sessions
 - `messages.created_at` → index untuk chronological ordering
@@ -194,6 +210,9 @@ Menyimpan hasil akhir analisis grading session.
 - Email harus valid dan unique
 - Firebase UID harus unique
 - Birth date tidak boleh di masa depan
+- Phone number harus format valid jika diisi (optional)
+- Avatar URL harus valid URL jika diisi (optional)
+- Email verified harus boolean (default false)
 
 ### Grading Sessions
 - Target major tidak boleh kosong
@@ -210,3 +229,24 @@ Menyimpan hasil akhir analisis grading session.
 - Final score harus antara 0-100
 - Readiness_level harus valid enum value
 - Analysis_report tidak boleh kosong
+
+---
+
+## Update History
+
+### Version 1.2 - November 2025
+- Added `max_questions` field to grading_sessions table (INTEGER DEFAULT 10)
+- Added `session_duration_minutes` field to grading_sessions table (INTEGER DEFAULT 60)
+- Updated PlantUML diagram and entity descriptions
+
+**Reason**: Align ERD with API Specification requirements for grading session management.
+
+### Version 1.1 - November 2025
+- Added `phone_number` field to users table (VARCHAR(20))
+- Added `avatar_url` field to users table (TEXT)
+- Added `email_verified` field to users table (BOOLEAN DEFAULT false)
+- Updated validation rules for new user fields
+- Added index for `users.email_verified`
+- Updated PlantUML diagram and entity descriptions
+
+**Reason**: Align ERD with API Specification requirements for complete user profile data.
