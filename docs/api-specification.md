@@ -13,6 +13,33 @@ Production: https://prodiplan.my.id
 
 **Note:** Production endpoint uses Cloudflare Tunnel (Zero Trust) which routes `prodiplan.my.id` → `api-gateway:4000`
 
+## Endpoint Structure (Important for Frontend)
+
+API Gateway menggunakan **direct path routing tanpa prefix `/api/v1`**. Frontend harus mengakses endpoint seperti berikut:
+
+| Service | Endpoint Pattern | Example |
+|---------|-----------------|---------|
+| Auth Service | `/auth/*` | `https://prodiplan.my.id/auth/login` |
+| Session Service | `/grading-sessions/*` | `https://prodiplan.my.id/grading-sessions` |
+| Result Service | `/grading-results/*` | `https://prodiplan.my.id/grading-results/{session_id}` |
+| Health Check | `/health` | `https://prodiplan.my.id/health` |
+
+**❌ Salah:**
+```
+https://prodiplan.my.id/api/v1/auth/login
+https://prodiplan.my.id/v1/auth/login
+```
+
+**✅ Benar:**
+```
+https://prodiplan.my.id/auth/login
+https://prodiplan.my.id/auth/register
+https://prodiplan.my.id/grading-sessions
+https://prodiplan.my.id/grading-results/{session_id}
+```
+
+> **Internal Note:** API Gateway melakukan path rewriting secara internal (contoh: `/auth` → `/v1/auth` untuk auth-service), tetapi ini transparan untuk frontend.
+
 ## Authentication
 
 Semua API endpoints (kecuali auth endpoints) memerlukan JWT token di header:
