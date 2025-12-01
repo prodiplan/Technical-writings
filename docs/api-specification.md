@@ -22,6 +22,7 @@ API Gateway menggunakan **direct path routing tanpa prefix `/api/v1`**. Frontend
 | Auth Service | `/auth/*` | `https://prodiplan.my.id/auth/login` |
 | Session Service | `/grading-sessions/*` | `https://prodiplan.my.id/grading-sessions` |
 | Result Service | `/grading-results/*` | `https://prodiplan.my.id/grading-results/{session_id}` |
+| WebSocket (Socket.io) | `/socket.io/*` | `https://prodiplan.my.id/socket.io/` |
 | Health Check | `/health` | `https://prodiplan.my.id/health` |
 
 **❌ Salah:**
@@ -515,23 +516,35 @@ Authorization: Bearer <jwt_token>
 
 ## WebSocket Events
 
+WebSocket service diakses melalui API Gateway menggunakan Socket.io. Semua koneksi WebSocket di-proxy dari `api-gateway:4000` ke `websocket-service:4004`.
+
 ### Connection
 
 ```javascript
-// Production
-const socket = io('wss://prodiplan.my.id', {
+// Production (melalui API Gateway + Cloudflare Tunnel)
+const socket = io('https://prodiplan.my.id', {
+  auth: {
+    token: 'jwt_token_here'
+  },
+  transports: ['websocket', 'polling'] // WebSocket dengan polling fallback
+});
+
+// Development (melalui API Gateway)
+const socket = io('http://localhost:4000', {
   auth: {
     token: 'jwt_token_here'
   }
 });
 
-// Development
-const socket = io('ws://localhost:4004', {
+// Direct ke WebSocket Service (development only, tidak untuk production)
+const socket = io('http://localhost:4004', {
   auth: {
     token: 'jwt_token_here'
   }
 });
 ```
+
+> **Penting:** Untuk production, gunakan `https://prodiplan.my.id` karena WebSocket di-proxy melalui API Gateway. Tidak perlu konfigurasi terpisah untuk WebSocket endpoint.
 
 ### Events
 
