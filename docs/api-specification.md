@@ -7,9 +7,11 @@ API documentation untuk AI Essay Preparedness Grader system menggunakan OpenAPI 
 ## Base URL
 
 ```
-Development: TO BE DETERMINED
-Production: TO BE DETERMINED
+Development: http://localhost:4000
+Production: https://prodiplan.my.id
 ```
+
+**Note:** Production endpoint uses Cloudflare Tunnel (Zero Trust) which routes `prodiplan.my.id` → `api-gateway:4000`
 
 ## Authentication
 
@@ -489,7 +491,15 @@ Authorization: Bearer <jwt_token>
 ### Connection
 
 ```javascript
-const socket = io('wss://api.prodiplan.id/v1', {
+// Production
+const socket = io('wss://prodiplan.my.id', {
+  auth: {
+    token: 'jwt_token_here'
+  }
+});
+
+// Development
+const socket = io('ws://localhost:4004', {
   auth: {
     token: 'jwt_token_here'
   }
@@ -715,7 +725,8 @@ API documentation includes Postman collection for easy testing with:
 
 ```json
 {
-  "base_url": "https://api-dev.prodiplan.id/v1",
+  "base_url": "https://prodiplan.my.id",
+  "base_url_dev": "http://localhost:4000",
   "jwt_token": "{{auth_token}}",
   "session_id": "{{session_id}}",
   "admin_token": "{{admin_token}}"

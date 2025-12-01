@@ -19,7 +19,7 @@ Sistem ini dirancang dengan arsitektur microservices untuk memastikan skalabilit
   - Profile management
   - Session validation
 
-### 2. Grading Session Service
+### 2. Session service
 - **Responsibility**: Mengelola sesi grading aktif
 - **Key Features**:
   - Membuat instance grading session
@@ -27,7 +27,7 @@ Sistem ini dirancang dengan arsitektur microservices untuk memastikan skalabilit
   - Mengelola state sesi (active, completed, expired)
   - Session timeout management
 
-### 3. AI Service
+### 3. Grading worker
 - **Responsibility**: Interaksi dengan AI untuk analisis esai
 - **Integration**: Google Gemini API
 - **Key Features**:
@@ -67,9 +67,9 @@ graph TD
     A[User] --> B[Frontend Application]
     B --> C[API Gateway]
     C --> D[Auth Service]
-    C --> E[Grading Session Service]
+    C --> E[session service]
     C --> F[WebSocket Service]
-    E --> G[AI Service]
+    E --> G[Grading worker]
     G --> H[Google Gemini API]
     E --> I[Result Service]
     F --> J[Real-time Communication]
@@ -103,7 +103,7 @@ graph TD
 
 ### External Services
 - **Authentication**: Firebase Authentication
-- **AI Service**: Google Gemini API
+- **Grading worker**: Google Gemini API
 - **File Storage**: Google Cloud Storage atau AWS S3
 - **Email Service**: SendGrid atau AWS SES
 
