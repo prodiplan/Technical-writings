@@ -21,7 +21,7 @@ Authorization: Bearer <jwt_token>
 
 ## API Endpoints
 
-### 1. Authentication Service
+### 1. Auth Service
 
 #### 1.1 User Registration
 
@@ -235,7 +235,7 @@ Content-Type: application/json
 }
 ```
 
-### 2. Grading Session Service
+### 2. Session Service
 
 #### 2.1 Create Grading Session
 
@@ -353,9 +353,9 @@ Content-Type: application/json
 }
 ```
 
-### 3. Messages Service
 
-#### 3.1 Get Session Messages
+
+#### 2.5 Get Session Messages
 
 ```http
 GET /grading-sessions/{session_id}/messages?limit=50&offset=0
@@ -398,7 +398,7 @@ Authorization: Bearer <jwt_token>
 }
 ```
 
-#### 3.2 Send Message
+#### 2.6 Send Message
 
 ```http
 POST /grading-sessions/{session_id}/messages
@@ -428,9 +428,9 @@ Content-Type: application/json
 }
 ```
 
-### 4. Grading Results Service
+### 3. Results Service
 
-#### 4.1 Get Grading Result
+#### 3.1 Get Grading Result
 
 ```http
 GET /grading-results/{session_id}
@@ -472,7 +472,7 @@ Authorization: Bearer <jwt_token>
 }
 ```
 
-#### 4.2 Get User's Grading Results
+#### 3.2 Get User's Grading Results
 
 ```http
 GET /grading-results?readiness_level=ready&limit=10&offset=0
