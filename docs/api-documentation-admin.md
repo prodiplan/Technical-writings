@@ -134,7 +134,7 @@ Managed by `admin-service` -> `sessions`.
 This is the workflow for Human-in-the-Loop verification of AI grading.
 
 ### 5.1 List Pending Verifications
-**GET** `/v1/admin/sessions`
+
 Use filters to find items needing review.
 
 **Query Parameters:**
